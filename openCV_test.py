@@ -18,16 +18,6 @@ def img_save(img, file_name):
     return
 
 
-def cut_img(img, l_top, r_tbm):
-    img = img[l_top[1]:r_tbm[1], l_top[0]: r_tbm[0]]
-    return img
-
-
-def gray_img(img):
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    return img
-
-
 def specify_main_explorer():  # 用檔名開啟主目錄的圖片
     file_name = "image.jpg"  # 指定圖片檔名，需要與.py的目錄在同一層
     img = img_read(file_name)
@@ -40,12 +30,31 @@ def specify_explorer_pic():  # 指定圖片路徑
     return img
 
 
+def cut_img(img, l_top, r_tbm):
+    img = img[l_top[1]:r_tbm[1], l_top[0]: r_tbm[0]]
+    return img
+
+
+def gray_img(img):
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    return img
+
+
 def key_in_file_name():  # 使用輸入的變數作為影像路徑
     name = input("請輸入檔名，預設image.jpg")
     print("輸入字串 " + name)
     if name == "":  # 如果沒有輸入字元，會用image.jpg取代
         name = "image.jpg"
     return name
+
+
+def key_in_angle():  # 使用輸入的變數作為影像路徑
+    angle = input("請輸入旋轉角度，預設15度 -順時針/+逆時針")
+    print("輸入字串 " + angle)
+    if angle == "":  # 如果沒有輸入字元，會用15取代
+        angle = 15
+    angle = int(angle)  # 字串轉數字
+    return angle
 
 
 def show_img(img):
@@ -71,15 +80,6 @@ def show_two_img(img1, img2):
     cv2.destroyAllWindows()  # 關閉視窗，不加也可使用
 
 
-def key_in_angle():  # 使用輸入的變數作為影像路徑
-    angle = input("請輸入旋轉角度，預設15度 -順時針/+逆時針")
-    print("輸入字串 " + angle)
-    if angle == "":  # 如果沒有輸入字元，會用15取代
-        angle = 15
-    angle = int(angle)  # 字串轉數字
-    return angle
-
-
 def rotate_img(img, angle):
     (h, w, d) = img.shape
     print(h, w, d)
@@ -91,6 +91,13 @@ def rotate_img(img, angle):
     # 第三個參數為變化後的圖片大小
     img = cv2.warpAffine(img, M, (w, h))
     return img, M
+
+
+def shift_img(img, shift, canvas_size):  # 平移圖片
+    # 平移矩阵M：[[1,0,x],[0,1,y]]
+    M = np.float32([[1, 0, shift[0]], [0, 1, shift[1]]])
+    img = cv2.warpAffine(img, M, canvas_size)
+    return img
 
 
 def rotate_img_model(img, angle):  # 旋轉圖片+調整圖片位置
@@ -134,15 +141,7 @@ def rotate_img_model(img, angle):  # 旋轉圖片+調整圖片位置
     return img
 
 
-def shift_img(img, shift, canvas_size):  # 平移圖片
-    # 平移矩阵M：[[1,0,x],[0,1,y]]
-    M = np.float32([[1, 0, shift[0]], [0, 1, shift[1]]])
-    img = cv2.warpAffine(img, M, canvas_size)
-    return img
-
-
 def gaussian_blur_img(img):  # 高斯模糊，減少雜訊；細節，以利分辨圖形特徵
-    img = gray_img(img)
     img = cv2.GaussianBlur(img, (5, 5), 0)
     # REF 指令說明 https://docs.opencv.org/master/d4/d86/group__imgproc__filter.html#gaabe8c836e97159a9193fb0b11ac52cf1
     # REF 找邊緣的方法 https://iter01.com/550063.html
@@ -150,7 +149,7 @@ def gaussian_blur_img(img):  # 高斯模糊，減少雜訊；細節，以利分�
 
 
 def canny_img(img):
-    img = cv2.Canny(img, 50, 180)
+    img = cv2.Canny(img, 30, 180)
     return img
 
 
