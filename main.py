@@ -1,16 +1,22 @@
 import openCV_test as opencv
-
+img = opencv.img_download("image.jpg")
 
 def main():
-    # opencv.show_main_explorer()
-    # opencv.show_pic_explorer_pic()
-    #
-    # key_in_file_name = input("請輸入檔名，預設image.jpg")
-    # opencv.key_in_variable(key_in_file_name)
-    #
+    # 用檔名開啟主目錄的圖片
+    # img = opencv.specify_main_explorer()
+    # opencv.show_img(img)
 
-    key_in_angle = input("請輸入旋轉角度，預設15度 -順時針/+逆時針")
-    opencv.key_in_angle(key_in_angle)
+    # 用目錄開啟圖片
+    # img = opencv.specify_explorer_pic()
+    # opencv.show_img(img)
+
+    # 用使用者指定的目錄開啟圖片
+    # new_name = opencv.new_file_name()
+    # img = opencv.img_download(new_name)
+    # opencv.show_img(img)
+
+    opencv.show_img(img)
+
 
 
 if __name__ == "__main__":
