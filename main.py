@@ -4,10 +4,6 @@ img = opencv.img_read("image.jpg")
 
 
 def main():
-    # 圖片轉灰階
-    gray_img = opencv.gray_img(img)
-    opencv.show_img(gray_img)
-
     # 用檔名開啟主目錄的圖片
     # img = opencv.specify_main_explorer()
     # opencv.show_img(img)
@@ -15,6 +11,14 @@ def main():
     # 用目錄開啟圖片
     # img = opencv.specify_explorer_pic()
     # opencv.show_img(img)
+
+    # 圖片轉灰階
+    # gray_img = opencv.gray_img(img)
+    # opencv.show_img(gray_img)
+
+    # 裁切圖片
+    c_img = opencv.cut_img(img, (100, 200), (300, 500))
+    opencv.show_img(c_img)
 
     # 儲存圖片
     # opencv.img_save(rotate_img, "A")

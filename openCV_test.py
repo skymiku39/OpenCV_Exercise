@@ -18,6 +18,11 @@ def img_save(img, file_name):
     return
 
 
+def cut_img(img, l_top, r_tbm):
+    c_img = img[l_top[1]:r_tbm[1], l_top[0]: r_tbm[0]]
+    return c_img
+
+
 def gray_img(img):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     return img
