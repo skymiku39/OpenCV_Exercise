@@ -1,6 +1,7 @@
 import cv2
 import matplotlib.pyplot as plt  # 數值數學擴展包 NumPy的可視化操作界面
 import math
+import numpy as np
 
 
 def img_download(path):
@@ -85,12 +86,24 @@ def adjust_canvas_optimization(img, angle):  # 調整畫布邊界
     r_p4 = (int(p4[0] * tmp_cos + p4[1] * math.sin(tmp_angle) + center[0]),
             int(p4[0] * tmp_sin + p4[1] * math.cos(tmp_angle) + center[1]))
 
-    print(r_p1)
-    print(r_p2)
-    print(r_p3)
-    print(r_p4)
-    return
+    # 計算需要平移的座標
+    r_min = min(r_p1[0], r_p2[0], r_p3[0], r_p4[0]), min(r_p1[1], r_p2[1], r_p3[1], r_p4[1])
+    # 平移多少位置
+    r_shift = (0 - r_min[0], 0 - r_min[1])
+    # 計算需要修正畫布的座標
+    r_max = max(r_p1[0], r_p2[0], r_p3[0], r_p4[0]), max(r_p1[1], r_p2[1], r_p3[1], r_p4[1])
+    # 畫布尺寸修正
+    r_canvas_size = (r_max[0] - r_min[0], r_max[1] - r_min[1])
+    # print(r_min)
+    # print(r_max)
+    # print(r_shift)
+    # print(r_canvas_size)
+
+    return r_shift, r_canvas_size
 
 
-def shift_img():  # 平移圖片
-    return
+def shift_img(img, shift, canvas_size):  # 平移圖片
+    # 平移矩阵M：[[1,0,x],[0,1,y]]
+    M = np.float32([[1, 0, shift[0]], [0, 1, shift[1]]])
+    img = cv2.warpAffine(img, M, canvas_size)
+    return img
