@@ -57,6 +57,20 @@ def show_img(img):
     cv2.destroyAllWindows()  # 關閉視窗，不加也可使用
 
 
+def show_two_img(img1, img2):
+    # 用 matplotlib 顯示圖片
+    image_rgb1 = cv2.cvtColor(img1, cv2.COLOR_BGR2RGB)  # cv2 轉成 matplotlib 格式
+    image_rgb2 = cv2.cvtColor(img2, cv2.COLOR_BGR2RGB)  # cv2 轉成 matplotlib 格式
+
+    plt.subplot(121), plt.imshow(image_rgb1), plt.title("Image1")
+    plt.xticks([]), plt.yticks([])
+    plt.subplot(122), plt.imshow(image_rgb2), plt.title("Image2")
+    plt.xticks([]), plt.yticks([])
+    plt.show()
+    cv2.waitKey(0)  # 等待按鍵
+    cv2.destroyAllWindows()  # 關閉視窗，不加也可使用
+
+
 def key_in_angle():  # 使用輸入的變數作為影像路徑
     angle = input("請輸入旋轉角度，預設15度 -順時針/+逆時針")
     print("輸入字串 " + angle)
