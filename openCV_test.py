@@ -19,12 +19,11 @@ def specify_explorer_pic():  # 指定圖片路徑
     return img
 
 
-def new_file_name():  # 使用輸入的變數作為影像路徑
+def key_in_file_name():  # 使用輸入的變數作為影像路徑
     name = input("請輸入檔名，預設image.jpg")
     print("輸入字串 " + name)
     if name == "":  # 如果沒有輸入字元，會用image.jpg取代
         name = "image.jpg"
-
     return name
 
 
@@ -45,23 +44,16 @@ def key_in_angle():  # 使用輸入的變數作為影像路徑
     if angle == "":  # 如果沒有輸入字元，會用15取代
         angle = 15
     angle = int(angle)  # 字串轉數字
+    return angle
+
+
+def rotate_img(img, angle):
     (h, w, d) = img.shape
-    center = (w // 2, h // 2)
+    center = (w // 2, h // 2)  # 找中心點
 
     # 第一個參數旋轉中心，第二個參數旋轉角度(-順時針/+逆時針)，第三個參數縮放比例
     M = cv2.getRotationMatrix2D(center, angle, 1.0)
 
     # 第三個參數變化後的圖片大小
-    rotate_img = cv2.warpAffine(img, M, (w, h))
-    show_img(rotate_img)
-
-def rotate_img(img):
-    (h, w, d) = img.shape
-    center = (w // 2, h // 2)
-
-    # 第一個參數旋轉中心，第二個參數旋轉角度(-順時針/+逆時針)，第三個參數縮放比例
-    M = cv2.getRotationMatrix2D(center, angle, 1.0)
-
-    # 第三個參數變化後的圖片大小
-    rotate_img = cv2.warpAffine(img, M, (w, h))
-    show_img(rotate_img)
+    img = cv2.warpAffine(img, M, (w, h))
+    return img
