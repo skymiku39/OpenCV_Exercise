@@ -18,6 +18,11 @@ def img_save(img, file_name):
     return
 
 
+def gray_img(img):
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    return img
+
+
 def specify_main_explorer():  # 用檔名開啟主目錄的圖片
     file_name = "image.jpg"  # 指定圖片檔名，需要與.py的目錄在同一層
     img = img_read(file_name)
