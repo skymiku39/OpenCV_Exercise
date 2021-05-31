@@ -51,8 +51,12 @@ def main():
     # opencv.show_two_img(img, negative_img)
 
     # 雙邊濾波器，去躁同時比較可以保持邊緣訊息，但速度慢
-    result_img = opencv.bilateral_filter_img(img)
-    opencv.show_two_img(img, result_img)
+    # result_img = opencv.bilateral_filter_img(img)
+    # opencv.show_two_img(img, result_img)
+
+    # 中值濾波，取捲積的範圍下的中間值，除椒鹽雜訊特有效
+    median_img = opencv.median_blur_img(img)
+    opencv.show_two_img(img, median_img)
 
 
 if __name__ == "__main__":

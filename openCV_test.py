@@ -167,3 +167,8 @@ def negative_img(img):
 def bilateral_filter_img(img):
     img = cv2.bilateralFilter(img, 9, 75, 75)
     return img
+
+
+def median_blur_img(img):
+    img = cv2.medianBlur(img, 5)
+    return img
