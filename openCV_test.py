@@ -136,7 +136,6 @@ def gaussian_blur_img(img):  # 高斯模糊，減少雜訊；細節，以利分�
 
 
 def canny_img(img):
-    img = gaussian_blur_img(img)
     img = cv2.Canny(img, 50, 180)
     return img
 

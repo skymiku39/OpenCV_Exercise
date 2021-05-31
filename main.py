@@ -1,6 +1,7 @@
 import openCV_test as opencv
 
 img = opencv.img_read("image.jpg")
+gray_img = opencv.gray_img(img)
 
 
 def main():
@@ -34,15 +35,14 @@ def main():
     # opencv.show_img(rotate_img)
 
     # 高斯模糊
-    # g_img = opencv.gaussian_blur_img(img)
-    # opencv.show_img(g_img)
+    # opencv.show_img(gray_img)
 
     # 邊緣檢測(canny)
-    # c_img = opencv.canny_img(img)
+    # c_img = opencv.canny_img(gray_img)
     # opencv.show_img(c_img)
 
     # 均值濾波
-    blur_img = opencv.averaging_blur_img(img)
+    blur_img = opencv.averaging_blur_img(gray_img)
     opencv.show_img(blur_img)
 
 
