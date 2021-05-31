@@ -38,8 +38,12 @@ def main():
     # opencv.show_img(g_img)
 
     # 邊緣檢測(canny)
-    c_img = opencv.canny_img(img)
-    opencv.show_img(c_img)
+    # c_img = opencv.canny_img(img)
+    # opencv.show_img(c_img)
+
+    # 均值濾波
+    blur_img = opencv.averaging_blur_img(img)
+    opencv.show_img(blur_img)
 
 
 if __name__ == "__main__":

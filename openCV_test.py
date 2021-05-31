@@ -139,3 +139,8 @@ def canny_img(img):
     img = gaussian_blur_img(img)
     img = cv2.Canny(img, 50, 180)
     return img
+
+
+def averaging_blur_img(img):
+    img = cv2.blur(img, (5, 5))
+    return img
