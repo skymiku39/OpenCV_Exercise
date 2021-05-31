@@ -1,5 +1,6 @@
 import cv2
 import matplotlib.pyplot as plt  # 數值數學擴展包 NumPy的可視化操作界面
+import math
 
 
 def img_download(path):
@@ -49,11 +50,47 @@ def key_in_angle():  # 使用輸入的變數作為影像路徑
 
 def rotate_img(img, angle):
     (h, w, d) = img.shape
+    print(h, w, d)
     center = (w // 2, h // 2)  # 找中心點
 
-    # 第一個參數旋轉中心，第二個參數旋轉角度(-順時針/+逆時針)，第三個參數縮放比例
+    # 參數旋轉中心(座標),第二個參數旋轉角度(-順時針/+逆時針),第三個參數縮放比例
     M = cv2.getRotationMatrix2D(center, angle, 1.0)
 
-    # 第三個參數變化後的圖片大小
+    # 第三個參數為變化後的圖片大小
     img = cv2.warpAffine(img, M, (w, h))
     return img
+
+
+def adjust_canvas_optimization(img, angle):  # 調整畫布邊界
+    # 取得圖片座標
+    (h, w, d) = img.shape
+    center = (w // 2, h // 2)
+    # 視中心點為原點，取得圖形相對座標
+    p1 = (0 - center[0], 0 - center[1])
+    p2 = (w - center[0], 0 - center[1])
+    p3 = (0 - center[0], h - center[1])
+    p4 = (w - center[0], h - center[1])
+
+    # 簡化數學式
+    tmp_angle = (angle * math.pi) / 180
+    tmp_sin = math.sin(tmp_angle)
+    tmp_cos = math.cos(tmp_angle)
+
+    r_p1 = (int(p1[0] * tmp_cos + p1[1] * math.sin(tmp_angle) + center[0]),
+            int(p1[0] * tmp_sin + p1[1] * math.cos(tmp_angle) + center[1]))
+    r_p2 = (int(p2[0] * tmp_cos + p2[1] * math.sin(tmp_angle) + center[0]),
+            int(p2[0] * tmp_sin + p2[1] * math.cos(tmp_angle) + center[1]))
+    r_p3 = (int(p3[0] * tmp_cos + p3[1] * math.sin(tmp_angle) + center[0]),
+            int(p3[0] * tmp_sin + p3[1] * math.cos(tmp_angle) + center[1]))
+    r_p4 = (int(p4[0] * tmp_cos + p4[1] * math.sin(tmp_angle) + center[0]),
+            int(p4[0] * tmp_sin + p4[1] * math.cos(tmp_angle) + center[1]))
+
+    print(r_p1)
+    print(r_p2)
+    print(r_p3)
+    print(r_p4)
+    return
+
+
+def shift_img():  # 平移圖片
+    return

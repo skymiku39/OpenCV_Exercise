@@ -18,9 +18,11 @@ def main():
     # opencv.show_img(img)
 
     # 旋轉圖片
-    angle = opencv.key_in_angle()
-    rotate_img = opencv.rotate_img(img, angle)
-    opencv.show_img(rotate_img)
+    # angle = opencv.key_in_angle()
+    # rotate_img = opencv.rotate_img(img, angle)
+    # opencv.show_img(rotate_img)
+
+    opencv.adjust_canvas_optimization(img, 15)
 
 
 if __name__ == "__main__":
