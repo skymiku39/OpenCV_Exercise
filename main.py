@@ -47,8 +47,12 @@ def main():
     # opencv.show_two_img(img, blur_img)
 
     # 負片效果
-    negative_img = opencv.negative_img(img)
-    opencv.show_two_img(img, negative_img)
+    # negative_img = opencv.negative_img(img)
+    # opencv.show_two_img(img, negative_img)
+
+    # 雙邊濾波器，去躁同時比較可以保持邊緣訊息，但速度慢
+    result_img = opencv.bilateral_filter_img(img)
+    opencv.show_two_img(img, result_img)
 
 
 if __name__ == "__main__":

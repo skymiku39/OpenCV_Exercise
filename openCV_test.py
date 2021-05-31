@@ -162,3 +162,8 @@ def averaging_blur_img(img):
 def negative_img(img):
     img = 255 - img
     return img
+
+
+def bilateral_filter_img(img):
+    img = cv2.bilateralFilter(img, 9, 75, 75)
+    return img
