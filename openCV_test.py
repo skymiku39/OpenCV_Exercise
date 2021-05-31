@@ -40,8 +40,6 @@ def show_img(img):
 
 def key_in_angle():  # 使用輸入的變數作為影像路徑
     angle = input("請輸入旋轉角度，預設15度 -順時針/+逆時針")
-    file_name = "image.jpg"
-    img = img_download(file_name)  # 圖片位置
     print("輸入字串 " + angle)
     if angle == "":  # 如果沒有輸入字元，會用15取代
         angle = 15
@@ -59,10 +57,10 @@ def rotate_img(img, angle):
 
     # 第三個參數為變化後的圖片大小
     img = cv2.warpAffine(img, M, (w, h))
-    return img
+    return img, M
 
 
-def adjust_canvas_optimization(img, angle):  # 調整畫布邊界
+def rotate_img_model(img, angle):  # 旋轉圖片+調整圖片位置
     # 取得圖片座標
     (h, w, d) = img.shape
     center = (w // 2, h // 2)
@@ -94,12 +92,13 @@ def adjust_canvas_optimization(img, angle):  # 調整畫布邊界
     r_max = max(r_p1[0], r_p2[0], r_p3[0], r_p4[0]), max(r_p1[1], r_p2[1], r_p3[1], r_p4[1])
     # 畫布尺寸修正
     r_canvas_size = (r_max[0] - r_min[0], r_max[1] - r_min[1])
-    # print(r_min)
-    # print(r_max)
-    # print(r_shift)
-    # print(r_canvas_size)
-
-    return r_shift, r_canvas_size
+    # 計算變換矩陣 (??)
+    M = rotate_img(img, angle)[1]
+    M[0, 2] = M[0, 2] + r_shift[0]
+    M[1, 2] = M[1, 2] + r_shift[1]
+    r_img = cv2.warpAffine(img, M, r_canvas_size)
+    # REF http://hk.uwenku.com/question/p-sfnzzoue-mz.html
+    return r_img
 
 
 def shift_img(img, shift, canvas_size):  # 平移圖片
