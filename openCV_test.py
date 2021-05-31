@@ -4,20 +4,29 @@ import math
 import numpy as np
 
 
-def img_download(path):
+def img_read(path):
     img = cv2.imread(path)  # 圖片檔名，需要與.py的目錄在同一層
     return img
 
 
+def img_save(img, file_name):
+    if file_name == "":
+        file_name = "output.jpg"
+    else:
+        file_name = file_name + ".jpg"
+    cv2.imwrite(file_name, img)  # 圖片檔名，與.py的目錄在同一層
+    return
+
+
 def specify_main_explorer():  # 用檔名開啟主目錄的圖片
     file_name = "image.jpg"  # 指定圖片檔名，需要與.py的目錄在同一層
-    img = img_download(file_name)
+    img = img_read(file_name)
     return img
 
 
 def specify_explorer_pic():  # 指定圖片路徑
     file_name = "./pic/imageMiku.jpg"  # 指定目錄
-    img = img_download(file_name)  # 圖片位置
+    img = img_read(file_name)  # 圖片位置
     return img
 
 

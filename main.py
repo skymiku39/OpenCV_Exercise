@@ -1,6 +1,6 @@
 import openCV_test as opencv
 
-img = opencv.img_download("image.jpg")
+img = opencv.img_read("image.jpg")
 
 
 def main():
@@ -21,6 +21,8 @@ def main():
     angle = opencv.key_in_angle()
     rotate_img = opencv.rotate_img_model(img, angle)
     opencv.show_img(rotate_img)
+    # 儲存圖片
+    opencv.img_save(rotate_img, "A")
 
 
 if __name__ == "__main__":
