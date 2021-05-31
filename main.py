@@ -33,10 +33,13 @@ def main():
     # rotate_img = opencv.rotate_img_model(img, angle)
     # opencv.show_img(rotate_img)
 
-    # 邊緣檢測
     # 高斯模糊
-    g_img = opencv.gaussian_blur_img(img)
-    opencv.show_img(g_img)
+    # g_img = opencv.gaussian_blur_img(img)
+    # opencv.show_img(g_img)
+
+    # 邊緣檢測(canny)
+    c_img = opencv.canny_img(img)
+    opencv.show_img(c_img)
 
 
 if __name__ == "__main__":

@@ -133,3 +133,9 @@ def gaussian_blur_img(img):  # 高斯模糊，減少雜訊；細節，以利分�
     # REF 指令說明 https://docs.opencv.org/master/d4/d86/group__imgproc__filter.html#gaabe8c836e97159a9193fb0b11ac52cf1
     # REF 找邊緣的方法 https://iter01.com/550063.html
     return gb_img
+
+
+def canny_img(img):
+    img = gaussian_blur_img(img)
+    c_img = cv2.Canny(img, 50, 180)
+    return c_img
