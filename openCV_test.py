@@ -172,3 +172,9 @@ def bilateral_filter_img(img):
 def median_blur_img(img):
     img = cv2.medianBlur(img, 5)
     return img
+
+
+def box_filter_img(img):
+    img = cv2.boxFilter(img, -1, (5, 5), normalize=1)
+    # REF 所有濾波參考資料 https://iter01.com/509811.html
+    return img

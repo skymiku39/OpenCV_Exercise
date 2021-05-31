@@ -55,8 +55,12 @@ def main():
     # opencv.show_two_img(img, result_img)
 
     # 中值濾波，取捲積的範圍下的中間值，除椒鹽雜訊特有效
-    median_img = opencv.median_blur_img(img)
-    opencv.show_two_img(img, median_img)
+    # median_img = opencv.median_blur_img(img)
+    # opencv.show_two_img(img, median_img)
+
+    # 方框濾波，與均值濾波類似，可調整歸一化處理(normalize=0)
+    result_img = opencv.box_filter_img(img)
+    opencv.show_two_img(img, result_img)
 
 
 if __name__ == "__main__":
