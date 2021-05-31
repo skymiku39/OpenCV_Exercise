@@ -19,8 +19,8 @@ def img_save(img, file_name):
 
 
 def cut_img(img, l_top, r_tbm):
-    c_img = img[l_top[1]:r_tbm[1], l_top[0]: r_tbm[0]]
-    return c_img
+    img = img[l_top[1]:r_tbm[1], l_top[0]: r_tbm[0]]
+    return img
 
 
 def gray_img(img):
@@ -115,9 +115,9 @@ def rotate_img_model(img, angle):  # 旋轉圖片+調整圖片位置
     M = rotate_img(img, angle)[1]
     M[0, 2] = M[0, 2] + r_shift[0]
     M[1, 2] = M[1, 2] + r_shift[1]
-    r_img = cv2.warpAffine(img, M, r_canvas_size)
+    img = cv2.warpAffine(img, M, r_canvas_size)
     # REF http://hk.uwenku.com/question/p-sfnzzoue-mz.html
-    return r_img
+    return img
 
 
 def shift_img(img, shift, canvas_size):  # 平移圖片
@@ -128,14 +128,14 @@ def shift_img(img, shift, canvas_size):  # 平移圖片
 
 
 def gaussian_blur_img(img):  # 高斯模糊，減少雜訊；細節，以利分辨圖形特徵
-    g_img = gray_img(img)
-    gb_img = cv2.GaussianBlur(g_img, (5, 5), 0)
+    img = gray_img(img)
+    img = cv2.GaussianBlur(img, (5, 5), 0)
     # REF 指令說明 https://docs.opencv.org/master/d4/d86/group__imgproc__filter.html#gaabe8c836e97159a9193fb0b11ac52cf1
     # REF 找邊緣的方法 https://iter01.com/550063.html
-    return gb_img
+    return img
 
 
 def canny_img(img):
     img = gaussian_blur_img(img)
-    c_img = cv2.Canny(img, 50, 180)
-    return c_img
+    img = cv2.Canny(img, 50, 180)
+    return img
