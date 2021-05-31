@@ -125,3 +125,11 @@ def shift_img(img, shift, canvas_size):  # 平移圖片
     M = np.float32([[1, 0, shift[0]], [0, 1, shift[1]]])
     img = cv2.warpAffine(img, M, canvas_size)
     return img
+
+
+def gaussian_blur_img(img):  # 高斯模糊，減少雜訊；細節，以利分辨圖形特徵
+    g_img = gray_img(img)
+    gb_img = cv2.GaussianBlur(g_img, (5, 5), 0)
+    # REF 指令說明 https://docs.opencv.org/master/d4/d86/group__imgproc__filter.html#gaabe8c836e97159a9193fb0b11ac52cf1
+    # REF 找邊緣的方法 https://iter01.com/550063.html
+    return gb_img
