@@ -157,3 +157,8 @@ def canny_img(img):
 def averaging_blur_img(img):
     img = cv2.blur(img, (5, 5))
     return img
+
+
+def negative_img(img):
+    img = 255 - img
+    return img

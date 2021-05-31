@@ -42,9 +42,13 @@ def main():
     # opencv.show_img(c_img)
 
     # 均值濾波
-    blur_img = opencv.averaging_blur_img(gray_img)
+    # blur_img = opencv.averaging_blur_img(gray_img)
     # opencv.show_img(blur_img)
-    opencv.show_two_img(img, blur_img)
+    # opencv.show_two_img(img, blur_img)
+
+    # 負片效果
+    negative_img = opencv.negative_img(img)
+    opencv.show_two_img(img, negative_img)
 
 
 if __name__ == "__main__":
