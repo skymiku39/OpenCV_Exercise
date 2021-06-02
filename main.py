@@ -48,7 +48,7 @@ def main():
     # #二值化
     # 方便圖像處理
     images, titles = opencv.black_white_img(gray_img)
-    opencv.show_images(images, titles)
+    opencv.show_images(images, titles, 2, 3)
     # #加雜訊 (加法性、乘法性)
 
     # #邊緣檢測

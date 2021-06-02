@@ -82,9 +82,9 @@ def show_two_img(img1, img2):
     cv2.destroyAllWindows()  # 關閉視窗，不加也可使用
 
 
-def show_images(images, titles):
-    for i in range(6):
-        plt.subplot(2, 3, i + 1), plt.imshow(images[i], "gray")
+def show_images(images, titles, row, column):
+    for i in range(len(images)):
+        plt.subplot(row, column, i + 1), plt.imshow(images[i], "gray")
         plt.title(titles[i])
         plt.xticks([]), plt.yticks([])
     plt.show()
