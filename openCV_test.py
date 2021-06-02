@@ -209,3 +209,68 @@ def black_white_img(img):
     titles = ["img", "BINARY", "BINARY_INV", "TRUNC", "TOZERO", "TOZERO_INV"]
     images = [img, thresh1, thresh2, thresh3, thresh4, thresh5]
     return images, titles
+
+
+def nothing(y):
+    pass
+
+
+def window_name(x):
+    return {
+        1: "binary_trackbar >thresh =maxVal, <thresh =0",
+        2: "binary_inv_trackbar >thresh =0, <thresh =maxVal",
+        3: "trunc_trackbar >thresh =thresh ",
+        4: "tozero_trackbar <thresh =0",
+        5: "tozero_inv_trackbar >thresh =0",
+    }[x]
+
+
+def w_h_trackbar_img(img, mode):
+    name = window_name(mode)
+    result = img
+    cv2.namedWindow(name)
+    cv2.createTrackbar("thresh", name, 127, 255, nothing)
+    cv2.createTrackbar("maxVal", name, 255, 255, nothing)
+    while 1:
+        if cv2.waitKey(20) & 0xFF == 27:
+            break
+        thresh = cv2.getTrackbarPos("thresh", name)
+        maxVal = cv2.getTrackbarPos("maxVal", name)
+        print(thresh, maxVal)
+        if mode == 1:
+            result = binary_trackbar(img, thresh, maxVal)
+        elif mode == 2:
+            result = binary_inv_trackbar(img, thresh, maxVal)
+        elif mode == 3:
+            result = trunc_trackbar(img, thresh, maxVal)
+        elif mode == 4:
+            result = tozero_trackbar(img, thresh, maxVal)
+        elif mode == 5:
+            result = tozero_inv_trackbar(img, thresh, maxVal)
+        cv2.imshow(name, result)
+    cv2.destroyAllWindows()
+
+
+def binary_trackbar(img, thresh, max_val):
+    ret, result = cv2.threshold(img, thresh, max_val, cv2.THRESH_BINARY)
+    return result
+
+
+def binary_inv_trackbar(img, thresh, max_val):
+    ret, result = cv2.threshold(img, thresh, max_val, cv2.THRESH_BINARY_INV)
+    return result
+
+
+def trunc_trackbar(img, thresh, max_val):
+    ret, result = cv2.threshold(img, thresh, max_val, cv2.THRESH_TRUNC)
+    return result
+
+
+def tozero_trackbar(img, thresh, max_val):
+    ret, result = cv2.threshold(img, thresh, max_val, cv2.THRESH_TOZERO)
+    return result
+
+
+def tozero_inv_trackbar(img, thresh, max_val):
+    ret, result = cv2.threshold(img, thresh, max_val, cv2.THRESH_TOZERO_INV)
+    return result
