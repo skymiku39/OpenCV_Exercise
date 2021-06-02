@@ -225,7 +225,7 @@ def window_name(x):
     }[x]
 
 
-def w_h_trackbar_img(img, mode):
+def show_w_h_trackbar_img(img, mode):
     name = window_name(mode)
     result = img
     cv2.namedWindow(name)
@@ -274,3 +274,22 @@ def tozero_trackbar(img, thresh, max_val):
 def tozero_inv_trackbar(img, thresh, max_val):
     ret, result = cv2.threshold(img, thresh, max_val, cv2.THRESH_TOZERO_INV)
     return result
+
+
+def add_gaussian_noise(img, mean=0, sigma=0.1):
+    # int -> float (標準化)
+    img = img / 255.0
+    # 隨機生成高斯 noise (float + float)
+    # 中間值, 分布值(非負數), 尺寸
+    noise = np.random.normal(mean, sigma, img.shape)
+    # noise + 原圖
+    gaussian_out = img + noise
+
+    # 所有值必須介於 0~1 之間，超過1 = 1，小於0 = 0
+    # clip(a, a_min, a_max, out=None)
+    gaussian_out = np.clip(gaussian_out, 0, 1)
+    # 高斯+原圖 float -> int (0~1 -> 0~255)
+    gaussian_out = np.uint8(gaussian_out * 255)
+    # noise: float -> int (0~1 -> 0~255)
+    noise = np.uint8(noise * 255)
+    return gaussian_out, noise
