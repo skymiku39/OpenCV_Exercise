@@ -82,6 +82,16 @@ def show_two_img(img1, img2):
     cv2.destroyAllWindows()  # 關閉視窗，不加也可使用
 
 
+def show_images(images, titles):
+    for i in range(6):
+        plt.subplot(2, 3, i + 1), plt.imshow(images[i], "gray")
+        plt.title(titles[i])
+        plt.xticks([]), plt.yticks([])
+    plt.show()
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+
 def rotate_img(img, angle):
     (h, w, d) = img.shape
     print(h, w, d)
@@ -179,3 +189,23 @@ def box_filter_img(img):
     img = cv2.boxFilter(img, -1, (5, 5), normalize=1)
     # REF 所有濾波參考資料 https://iter01.com/509811.html
     return img
+
+
+def black_white_img(img):
+    # ret?識別TF?
+    # >127 =255, <127 =0 將小於閾值的灰度值設為0，其他值設為最大灰度值。
+    ret, thresh1 = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
+    # >127 =0, <127 =255 將大於閾值的灰度值設為0，其他值設為最大灰度值。
+    ret, thresh2 = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY_INV)
+
+    # >127 =127 將大於閾值的灰度值設為閾值，小於閾值的值保持不變。
+    ret, thresh3 = cv2.threshold(img, 127, 255, cv2.THRESH_TRUNC)
+
+    # <127 =0 將小於閾值的灰度值設為0，大於閾值的值保持不變。
+    ret, thresh4 = cv2.threshold(img, 127, 255, cv2.THRESH_TOZERO)
+    # >127 =0 將大於閾值的灰度值設為0，小於閾值的值保持不變。
+    ret, thresh5 = cv2.threshold(img, 127, 255, cv2.THRESH_TOZERO_INV)
+
+    titles = ["img", "BINARY", "BINARY_INV", "TRUNC", "TOZERO", "TOZERO_INV"]
+    images = [img, thresh1, thresh2, thresh3, thresh4, thresh5]
+    return images, titles
