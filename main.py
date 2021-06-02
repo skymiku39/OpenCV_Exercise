@@ -53,9 +53,12 @@ def main():
     # opencv.show_w_h_trackbar_img(gray_img, 1)
 
     # #加雜訊
-    # 高斯噪聲gaussian_out(加法性)
-    result_img, gaussian_img = opencv.add_gaussian_noise(gray_img)
-    opencv.img_save(result_img, "gaussian_img")
+    # 高斯噪聲 gaussian noise(加法性)
+    # result_img, gaussian_noise_img = opencv.add_gaussian_noise(gray_img)
+    # opencv.img_save(result_img, "gaussian_img")
+    # 椒鹽雜訊 Salt-and-pepper noise
+    result_img, sp_noise_img = opencv.add_salt_pepper_noise(gray_img, 0.3)
+    opencv.img_save(result_img, "Salt_and_pepper_img")
 
     # #邊緣檢測
     # canny邊緣檢測算子

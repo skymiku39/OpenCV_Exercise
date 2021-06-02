@@ -211,7 +211,7 @@ def black_white_img(img):
     return images, titles
 
 
-def nothing(y):
+def nothing():
     pass
 
 
@@ -293,3 +293,21 @@ def add_gaussian_noise(img, mean=0, sigma=0.1):
     # noise: float -> int (0~1 -> 0~255)
     noise = np.uint8(noise * 255)
     return gaussian_out, noise
+
+
+def add_salt_pepper_noise(img, proportion=0.3):
+    image_copy = img.copy()
+    (h, w) = img.shape
+    # 生成proportion 比例
+    print(proportion)
+    # 生成座標
+    X = np.random.randint(h, size=(int(proportion * h * w)))
+    Y = np.random.randint(w, size=(int(proportion * h * w)))
+    # 在對應座標的圖片加上 0 or 255 訊號
+    image_copy[X, Y] = np.random.choice([0, 255], size=(int(proportion * h * w),))
+
+    # 看不懂
+    sp_noise = np.ones_like(image_copy) * 127
+    # 将噪声给噪声容器
+    sp_noise[X, Y] = image_copy[X, Y]
+    return image_copy, sp_noise
