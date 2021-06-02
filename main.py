@@ -31,27 +31,34 @@ def main():
 
     # #濾波方式整理
     # 均值濾波
+    # 取捲積範圍的平均值
     # result_img = opencv.averaging_blur_img(img)
     # 高斯模糊
+    # "多次連續高斯模糊的效果"與"一次更大的高斯模糊"產生"同樣的效果"
     # result_img = opencv.gaussian_blur_img(img)
-    # 中值濾波，取捲積的範圍下的中間值，除椒鹽雜訊特有效
+    # 中值濾波
+    # 取捲積的範圍下的中間值，除"斑點雜訊"與"椒鹽雜訊"特有效
     # result_img = opencv.median_blur_img(img)
     # 方框濾波，與均值濾波類似，可調整歸一化處理(normalize=0)
     # result_img = opencv.box_filter_img(img)
     # 雙邊濾波器，去躁同時比較可以保持邊緣訊息，但速度慢
+    # 使影像平滑化的非線性濾波器，多考慮了像素之間的光度/色彩差異
     # result_img = opencv.bilateral_filter_img(img)
 
-    # #邊緣檢測
-    # canny
-    tmp_img = opencv.gaussian_blur_img(gray_img)
-    result_img = opencv.canny_img(tmp_img)
+    # #二值化
+    # #加雜訊 (加法性、乘法性)
 
+    # #邊緣檢測
+    # canny邊緣檢測算子
+    # pc上實時圖像處理可能會太慢
+    # tmp_img = opencv.gaussian_blur_img(gray_img)
+    # result_img = opencv.canny_img(tmp_img)
+
+    # #顯示
     # 單獨顯示
     # opencv.show_img(result_img)
-
     # 比較顯示
-    opencv.show_two_img(img, result_img)
-
+    # opencv.show_two_img(img, result_img)
     # 比較顯示2
     # opencv.cv2.imshow("Input", img)
     # opencv.cv2.imshow("Result", result_img)

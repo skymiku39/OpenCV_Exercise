@@ -35,7 +35,9 @@ def cut_img(img, l_top, r_tbm):
     return img
 
 
-def gray_img(img):
+def gray_img(img):  # RGB轉Gray
+    # 權重比例：Gray = R * 0.299 + G * 0.587 + B * 0.114
+    # 人眼在 紅綠藍權重約為 3:6:1 時較為舒適，得出公式
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     return img
 
