@@ -1,6 +1,6 @@
 import openCV_test as opencv
 
-img = opencv.img_read("image.jpg")
+img = opencv.img_read("4point.png")
 gray_img = opencv.gray_img(img)
 
 
@@ -57,9 +57,9 @@ def main():
     # result_img, gaussian_noise_img = opencv.add_gaussian_noise(gray_img)
     # opencv.img_save(result_img, "gaussian_img")
     # 椒鹽雜訊 Salt-and-pepper noise
-    result_img, sp_noise_img = opencv.add_salt_pepper_noise(gray_img, 0.3)
-    opencv.img_save(result_img, "Salt_and_pepper_img")
-
+    # result_img, sp_noise_img = opencv.add_salt_pepper_noise(gray_img, 0.3)
+    # opencv.img_save(result_img, "Salt_and_pepper_img")
+    x = opencv.edge_detection()
     # #邊緣檢測
     # canny邊緣檢測算子
     # pc上實時圖像處理可能會太慢
@@ -68,7 +68,7 @@ def main():
 
     # #顯示
     # 單獨顯示
-    opencv.show_img(result_img)
+    # opencv.show_img(result_img)
     # 比較顯示
     # opencv.show_two_img(img, result_img)
     # 比較顯示2

@@ -311,3 +311,20 @@ def add_salt_pepper_noise(img, proportion=0.3):
     # 将噪声给噪声容器
     sp_noise[X, Y] = image_copy[X, Y]
     return image_copy, sp_noise
+
+
+def edge_detection(h=300, w=300, center=(0, 0), size=3):
+    # 建立捲積範圍
+    coordinate_array = [[False] * size for i in range(size)]
+    # 選取邊緣距離中心點幾格
+    edge = (size - 1) / 2
+    # 邊緣檢測
+    for i in range(size):
+        for j in range(size):
+
+            if h - 1 >= center[0] - edge + i >= 0 and w - 1 >= center[1] - edge + j >= 0:
+                coordinate_array[i][j] = True
+            else:
+                coordinate_array[i][j] = False
+    # print(coordinate_array)
+    return coordinate_array
